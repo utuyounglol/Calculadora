@@ -1,122 +1,190 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Científica</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #1e1e2e;
-            color: white;
-        }
-        .calculator {
-            width: 320px;
-            background: #292b3a;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-        .display {
-            width: 100%;
-            height: 50px;
-            font-size: 1.5em;
-            text-align: right;
-            padding: 10px;
-            background: #1a1a2e;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        button {
-            padding: 15px;
-            font-size: 1.2em;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .btn-operator { background: #ff9500; color: white; }
-        .btn-number { background: #4e4e5a; color: white; }
-        .btn-equal { background: #28a745; color: white; }
-        .btn-clear { background: #dc3545; color: white; }
-        button:hover { opacity: 0.8; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora Científica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #111;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+    .calculator {
+      width: 360px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 10px;
+      background: #222;
+    }
+    .screen {
+      width: 100%;
+      height: 50px;
+      font-size: 1.5em;
+      text-align: right;
+      margin-bottom: 10px;
+      background: black;
+      color: white;
+      border: none;
+      padding: 10px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+    }
+    button {
+      padding: 15px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    /* Colores para distintos grupos */
+    .gray { background: #666; }
+    .orange { background: #ff9500; }
+    .dark-gray { background: #444; }
+    .yellow { background: #ffcc00; color: black; }
+    .purple { background: #7d3cff; }
+  </style>
 </head>
 <body>
-
-    <div class="calculator">
-        <input type="text" id="display" class="display" disabled>
-        <div class="buttons">
-            <button class="btn-operator" onclick="clearDisplay()">C</button>
-            <button class="btn-operator" onclick="appendToDisplay('(')">(</button>
-            <button class="btn-operator" onclick="appendToDisplay(')')">)</button>
-            <button class="btn-operator" onclick="appendToDisplay('/')">÷</button>
-
-            <button class="btn-number" onclick="appendToDisplay('7')">7</button>
-            <button class="btn-number" onclick="appendToDisplay('8')">8</button>
-            <button class="btn-number" onclick="appendToDisplay('9')">9</button>
-            <button class="btn-operator" onclick="appendToDisplay('*')">×</button>
-
-            <button class="btn-number" onclick="appendToDisplay('4')">4</button>
-            <button class="btn-number" onclick="appendToDisplay('5')">5</button>
-            <button class="btn-number" onclick="appendToDisplay('6')">6</button>
-            <button class="btn-operator" onclick="appendToDisplay('-')">−</button>
-
-            <button class="btn-number" onclick="appendToDisplay('1')">1</button>
-            <button class="btn-number" onclick="appendToDisplay('2')">2</button>
-            <button class="btn-number" onclick="appendToDisplay('3')">3</button>
-            <button class="btn-operator" onclick="appendToDisplay('+')">+</button>
-
-            <button class="btn-number" onclick="appendToDisplay('0')">0</button>
-            <button class="btn-number" onclick="appendToDisplay('.')">.</button>
-            <button class="btn-equal" onclick="calculate()">=</button>
-            <button class="btn-operator" onclick="appendToDisplay('**')">^</button>
-
-            <button class="btn-operator" onclick="appendToDisplay('Math.sqrt(')">√</button>
-            <button class="btn-operator" onclick="appendToDisplay('Math.sin(')">sin</button>
-            <button class="btn-operator" onclick="appendToDisplay('Math.cos(')">cos</button>
-            <button class="btn-operator" onclick="appendToDisplay('Math.tan(')">tan</button>
-
-            <button class="btn-operator" onclick="appendToDisplay('Math.log(')">ln</button>
-            <button class="btn-operator" onclick="appendToDisplay('Math.exp(')">e^</button>
-            <button class="btn-operator" onclick="appendToDisplay('Math.PI')">π</button>
-            <button class="btn-operator" onclick="appendToDisplay('Math.E')">e</button>
-        </div>
+  <div class="calculator">
+    <input type="text" id="screen" class="screen" disabled>
+    <div class="buttons">
+      <!-- Fila 1 -->
+      <button class="yellow" onclick="placeholder('SHIFT')">SHIFT</button>
+      <button class="purple" onclick="placeholder('ALPHA')">ALPHA</button>
+      <button class="gray" onclick="placeholder('MODE')">MODE</button>
+      <button class="gray" onclick="placeholder('2nd')">2nd</button>
+      <button class="dark-gray" onclick="appendToScreen('fact(')">x!</button>
+      <!-- Fila 2 -->
+      <button class="gray" onclick="placeholder('∫dx')">∫dx</button>
+      <button class="gray" onclick="placeholder('∑')">∑</button>
+      <button class="gray" onclick="placeholder('logxʸ')">logxʸ</button>
+      <button class="gray" onclick="placeholder('x⁻¹')">x⁻¹</button>
+      <button class="gray" onclick="placeholder('10ˣ')">10ˣ</button>
+      <!-- Fila 3 -->
+      <button class="gray" onclick="appendToScreen('sqrt(')">√x</button>
+      <button class="gray" onclick="appendToScreen('^2')">x²</button>
+      <button class="gray" onclick="appendToScreen('^')">xʸ</button>
+      <button class="gray" onclick="appendToScreen('log(')">log</button>
+      <button class="gray" onclick="appendToScreen('ln(')">ln</button>
+      <!-- Fila 4 -->
+      <button class="gray" onclick="appendToScreen('asin(')">Sin⁻¹</button>
+      <button class="gray" onclick="appendToScreen('acos(')">Cos⁻¹</button>
+      <button class="gray" onclick="appendToScreen('atan(')">Tan⁻¹</button>
+      <button class="gray" onclick="placeholder('hyp')">hyp</button>
+      <button class="gray" onclick="appendToScreen('sin(')">Sin</button>
+      <!-- Fila 5 -->
+      <button class="gray" onclick="appendToScreen('cos(')">Cos</button>
+      <button class="gray" onclick="appendToScreen('tan(')">Tan</button>
+      <button class="gray" onclick="placeholder('RCL')">RCL</button>
+      <button class="gray" onclick="placeholder('ENG')">ENG</button>
+      <button class="gray" onclick="appendToScreen('(')">(</button>
+      <!-- Fila 6 -->
+      <button class="gray" onclick="appendToScreen(')')">)</button>
+      <button class="gray" onclick="placeholder('S⇔D')">S⇔D</button>
+      <button class="orange" onclick="clearScreen()">AC</button>
+      <button class="orange" onclick="backspace()">←</button>
+      <button class="gray" onclick="placeholder('M+')">M+</button>
+      <!-- Fila 7 -->
+      <button class="dark-gray" onclick="appendToScreen('7')">7</button>
+      <button class="dark-gray" onclick="appendToScreen('8')">8</button>
+      <button class="dark-gray" onclick="appendToScreen('9')">9</button>
+      <button class="dark-gray" onclick="appendToScreen('×')">×</button>
+      <button class="dark-gray" onclick="appendToScreen('÷')">÷</button>
+      <!-- Fila 8 -->
+      <button class="dark-gray" onclick="appendToScreen('4')">4</button>
+      <button class="dark-gray" onclick="appendToScreen('5')">5</button>
+      <button class="dark-gray" onclick="appendToScreen('6')">6</button>
+      <button class="dark-gray" onclick="appendToScreen('+')">+</button>
+      <button class="dark-gray" onclick="appendToScreen('-')">-</button>
+      <!-- Fila 9 -->
+      <button class="dark-gray" onclick="appendToScreen('1')">1</button>
+      <button class="dark-gray" onclick="appendToScreen('2')">2</button>
+      <button class="dark-gray" onclick="appendToScreen('3')">3</button>
+      <button class="gray" onclick="appendToScreen('π')">π</button>
+      <button class="gray" onclick="appendToScreen('e')">e</button>
+      <!-- Fila 10 -->
+      <button class="dark-gray" onclick="appendToScreen('0')">0</button>
+      <button class="gray" onclick="appendToScreen('Exp(')">Exp</button>
+      <button class="gray" onclick="appendToScreen('Ans')">Ans</button>
+      <button class="orange" onclick="calculate()">=</button>
     </div>
+  </div>
 
-    <script>
-        function appendToDisplay(value) {
-            document.getElementById("display").value += value;
-        }
+  <script>
+    // Variable para almacenar el resultado anterior
+    let prevAns = '';
 
-        function clearDisplay() {
-            document.getElementById("display").value = "";
-        }
+    // Verificación al cargar
+    window.onload = function() {
+      console.log("Calculadora cargada correctamente.");
+    };
 
-        function calculate() {
-            try {
-                let result = eval(document.getElementById("display").value);
-                document.getElementById("display").value = result;
-            } catch (error) {
-                alert("Error en la expresión");
-                clearDisplay();
-            }
-        }
-    </script>
+    // Función para mostrar mensajes de botones no implementados
+    function placeholder(func) {
+      alert('Función ' + func + ' no implementada.');
+    }
 
-</body>
-</html>
+    // Función para agregar texto a la pantalla
+    function appendToScreen(value) {
+      const screen = document.getElementById('screen');
+      // Si se usa Ans, reemplaza por el valor de la respuesta anterior
+      if (value === 'Ans') {
+        screen.value += prevAns;
+      } else {
+        screen.value += value;
+      }
+    }
 
-              
+    // Función para borrar todo
+    function clearScreen() {
+      document.getElementById('screen').value = '';
+    }
+
+    // Función para borrar el último carácter
+    function backspace() {
+      const screen = document.getElementById('screen');
+      screen.value = screen.value.slice(0, -1);
+    }
+
+    // Función factorial
+    function fact(n) {
+      n = Number(n);
+      if (n < 0) return NaN;
+      if (n === 0 || n === 1) return 1;
+      let result = 1;
+      for (let i = 2; i <= n; i++) {
+        result *= i;
+      }
+      return result;
+    }
+
+    // Aseguramos que Math.log10 exista
+    if (!Math.log10) {
+      Math.log10 = function(x) {
+        return Math.log(x) / Math.LN10;
+      };
+    }
+
+    // Función para convertir la expresión a una forma evaluable en JavaScript
+    function convertExpression(expr) {
+      // Reemplazos básicos
+      expr = expr.replace(/×/g, "*");
+      expr = expr.replace(/÷/g, "/");
+      expr = expr.replace(/π/g, "Math.PI");
+      // Para 'e' se reemplaza solo si es una variable aislada (utilizando espacios o inicio/final)
+      expr = expr.replace(/\be\b/g, "Math.E");
+      // Reemplazar ^ por **
+      expr = expr.replace(/\^/g, "**");
+      // Funciones trigonométricas y otras funciones de Math
+      expr = expr.replace(/sqrt
